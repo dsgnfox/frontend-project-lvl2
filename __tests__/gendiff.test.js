@@ -48,4 +48,3 @@ test('file1 to file2', () => {
 test('file1 to file1', () => {
   expect(diff.file1ToFile1).toBe(matches.file1ToFile1);
 });
-
