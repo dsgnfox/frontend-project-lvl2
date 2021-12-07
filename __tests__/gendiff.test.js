@@ -1,6 +1,6 @@
+import { beforeAll, expect, test } from '@jest/globals';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { expect } from '@jest/globals';
 import genDiff from '../index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -48,3 +48,4 @@ test('file1 to file2', () => {
 test('file1 to file1', () => {
   expect(diff.file1ToFile1).toBe(matches.file1ToFile1);
 });
+

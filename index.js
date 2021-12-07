@@ -1,14 +1,11 @@
 import _ from 'lodash';
-import fs from 'fs';
-import path from 'path';
+import parser from './src/parsers.js';
 
 const getUniqKeys = (obj1, obj2) => _.uniq([...Object.keys(obj1), ...Object.keys(obj2)]);
 
-const getJsonFileData = (filePath) => JSON.parse(fs.readFileSync(path.resolve(process.cwd(), filePath), 'utf8'));
-
 const genDiff = (oldFilePath, newFilePath) => {
-  const oldFile = getJsonFileData(oldFilePath);
-  const newFile = getJsonFileData(newFilePath);
+  const oldFile = parser(oldFilePath);
+  const newFile = parser(newFilePath);
   const uniqKeys = getUniqKeys(oldFile, newFile) ?? [];
   const diffs = [];
 
