@@ -12,6 +12,6 @@ program
   .arguments('oldFilePath newFilePath')
   .action((oldFilePath, newFilePath) => {
     const diff = genDiff(oldFilePath, newFilePath);
-    console.log(diff);
+    console.dir(diff, {depth: null});
   })
   .parse();
