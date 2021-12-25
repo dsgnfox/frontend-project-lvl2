@@ -37,10 +37,7 @@ const mapping = {
 
 const stylish = (data) => {
   const iter = (tree, depth) => {
-    const lines = tree.flatMap((node) => {
-      // console.dir(node, {depth: null})
-      return mapping[node.status](depth, node, iter)
-    });
+    const lines = tree.flatMap((node) => mapping[node.status](depth, node, iter));
     return getStringifyTree(lines, getIndent(depth));
   };
   return iter(data, 0);

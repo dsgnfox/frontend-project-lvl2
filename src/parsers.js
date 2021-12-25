@@ -7,9 +7,10 @@ const getFileData = (filePath) => fs.readFileSync(path.resolve(process.cwd(), fi
 const parseData = (data, extname) => {
   if (extname === '.yaml' || extname === '.yml') {
     return yaml.load(data);
-  } else if (extname === '.json') {
+  } if (extname === '.json') {
     return JSON.parse(data);
   }
+  throw new Error(`${extname} - неподдерживаемый формат файла`);
 };
 
 const parser = (filePath) => {

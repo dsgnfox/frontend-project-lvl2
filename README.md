@@ -11,4 +11,4 @@ make install
 npm link
 gendiff oldFilePath newFilePath
 ```
-[![asciicast](https://asciinema.org/a/dUM7KaV16itDtDn5HyFR5dR0q.svg)](https://asciinema.org/a/dUM7KaV16itDtDn5HyFR5dR0q)
+[![asciicast](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK.svg)](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK)
