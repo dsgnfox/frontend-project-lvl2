@@ -13,13 +13,14 @@ const getFixturePath = (filePath) => path.join(__dirname, '..', '__fixtures__', 
 
 const readFile = (filePath) => fs.readFileSync(getFixturePath(filePath), 'utf8');
 
-const formatters = ['stylish', 'plain'];
+const formatters = ['stylish', 'plain', 'json'];
 const result = {};
 const files = {};
 
 beforeAll(() => {
   result.stylish = readFile('resultStylish.txt');
   result.plain = readFile('resultPlain.txt');
+  result.json = readFile('resultJson.txt');
 
   files.beforeFileJSON = getFixturePath('before.json');
   files.afterFileJSON = getFixturePath('after.json');

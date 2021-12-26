@@ -24,3 +24,7 @@ gendiff oldFilePath newFilePath
 `plain`
 
 [![asciicast](https://asciinema.org/a/j2AZWd7Gca5PX17WAgMYGcdKP.svg)](https://asciinema.org/a/j2AZWd7Gca5PX17WAgMYGcdKP)
+
+`json`
+
+[![asciicast](https://asciinema.org/a/id63v1U0m6dfe6FPLQ5caKLuA.svg)](https://asciinema.org/a/id63v1U0m6dfe6FPLQ5caKLuA)
