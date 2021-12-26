@@ -14,7 +14,7 @@ const result = {
     setting6: {
       key: 'value',
       doge: {
-        wow: '',
+        wow: 'too much',
       },
     },
   },
@@ -31,6 +31,16 @@ const result = {
       id: 45,
     },
   },
+  group4: {
+    default: null,
+    foo: 0,
+    isNested: false,
+    nest: {
+      bar: '',
+      isNested: true,
+    },
+    type: 'bas',
+  },
 };
 
 const data = {};
@@ -38,7 +48,7 @@ const data = {};
 beforeAll(() => {
   const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
   data.json = parser(getFixturePath('before.json'));
-  data.yaml = parser(getFixturePath('before.yaml'));
+  data.yaml = parser(getFixturePath('before.yml'));
 });
 
 test('yaml', () => {

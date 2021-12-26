@@ -25,7 +25,7 @@ const getValue = (data, depth) => {
   return getStringifyTree(lines, getIndent(depth));
 };
 
-const getStringifyLine = (depth, sign, key, value) => `${getIndent(depth)} ${sign} ${key}: ${getValue(value, depth + 1)}`;
+const getStringifyLine = (depth, sign, key, value) => ` ${getIndent(depth)} ${sign} ${key}: ${getValue(value, depth + 1)}`;
 
 const mapping = {
   added: (depth, { name, newValue }) => getStringifyLine(depth, '+', name, newValue),
