@@ -2,7 +2,7 @@ import _ from 'lodash';
 import parser from './parsers.js';
 import formatter from '../formatter/index.js';
 
-const getUniqSortedKeys = (a, b) => _.uniq([...Object.keys(a), ...Object.keys(b)]).sort();
+const getUniqSortedKeys = (a, b) => _.sortBy(_.uniq([...Object.keys(a), ...Object.keys(b)]));
 
 const makeNode = (name, oldValue, newValue, status) => ({
   name, oldValue, newValue, status,
