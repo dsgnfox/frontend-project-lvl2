@@ -29,7 +29,7 @@ const getStringifyLine = (depth, sign, key, value) => `${getIndent(depth)} ${sig
 
 const mapping = {
   added: (depth, { name, newValue }) => getStringifyLine(depth, '+', name, newValue),
-  deleted: (depth, { name, oldValue }) => getStringifyLine(depth, '-', name, oldValue),
+  removed: (depth, { name, oldValue }) => getStringifyLine(depth, '-', name, oldValue),
   unchanged: (depth, { name, oldValue }) => getStringifyLine(depth, ' ', name, oldValue),
   updated: (depth, { name, oldValue, newValue }) => [getStringifyLine(depth, '-', name, oldValue), getStringifyLine(depth, '+', name, newValue)],
   nested: (depth, { name, children }, iter) => getStringifyLine(depth, ' ', name, iter(children, depth + 1)),

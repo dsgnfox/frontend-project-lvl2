@@ -11,4 +11,16 @@ make install
 npm link
 gendiff oldFilePath newFilePath
 ```
+
+## Опции
+### Форматирование
+`-f, --format [type]`
+
+
+`stylish` (default)
 [![asciicast](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK.svg)](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK)
+
+
+`plain`
+
+[![asciicast](https://asciinema.org/a/j2AZWd7Gca5PX17WAgMYGcdKP.svg)](https://asciinema.org/a/j2AZWd7Gca5PX17WAgMYGcdKP)

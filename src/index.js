@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import parser from './parsers.js';
-import stylish from '../formatter/stylish.js';
+import formatter from '../formatter/index.js';
 
 const getUniqSortedKeys = (a, b) => _.uniq([...Object.keys(a), ...Object.keys(b)]).sort();
 
@@ -19,7 +19,7 @@ const getDiffStatus = (key, before, after) => {
 
   if (!_.has(before, key)) return 'added';
 
-  if (!_.has(after, key)) return 'deleted';
+  if (!_.has(after, key)) return 'removed';
 
   if (!_.isEqual(before[key], after[key])) return 'updated';
 
@@ -46,11 +46,11 @@ const makeDiffTree = (oldState = {}, newState = {}) => {
   return uniqKeys.map((key) => iter(key, oldState, newState));
 };
 
-const genDiff = (oldFilePath, newFilePath) => {
+const genDiff = (oldFilePath, newFilePath, format) => {
   const oldFile = parser(oldFilePath);
   const newFile = parser(newFilePath);
   const diffs = makeDiffTree(oldFile, newFile);
-  const styled = stylish(diffs);
+  const styled = formatter(diffs, format);
 
   return styled;
 };
