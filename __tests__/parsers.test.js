@@ -1,10 +1,11 @@
-import { beforeAll, expect, test } from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import parser from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 const result = {
   common: {
@@ -43,18 +44,12 @@ const result = {
   },
 };
 
-const data = {};
-
-beforeAll(() => {
-  const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-  data.json = parser(getFixturePath('before.json'));
-  data.yaml = parser(getFixturePath('before.yml'));
-});
-
 test('yaml', () => {
-  expect(data.yaml).toEqual(result);
+  const yaml = parser(getFixturePath('before.yml'));
+  expect(yaml).toEqual(result);
 });
 
 test('json', () => {
-  expect(data.json).toEqual(result);
+  const json = parser(getFixturePath('before.json'));
+  expect(json).toEqual(result);
 });
