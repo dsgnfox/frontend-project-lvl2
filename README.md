@@ -18,6 +18,7 @@ gendiff oldFilePath newFilePath
 
 
 `stylish` (default)
+
 [![asciicast](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK.svg)](https://asciinema.org/a/8rzXBkslISFnaryj9bMQHysjK)
 
 
