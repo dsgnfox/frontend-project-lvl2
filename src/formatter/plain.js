@@ -28,6 +28,7 @@ const getStringifyLine = (node, path) => {
 };
 
 const plain = (data) => {
+  const rootChildren = data.children;
   const iter = (node, path = '') => {
     const { children } = node;
     const ancestry = path === '' ? node.name : `${path}.${node.name}`;
@@ -36,7 +37,7 @@ const plain = (data) => {
     }
     return children.flatMap((child) => iter(child, ancestry));
   };
-  return data.flatMap((node) => iter(node))
+  return rootChildren.flatMap((node) => iter(node))
     .filter((str) => str !== '')
     .join('\n');
 };

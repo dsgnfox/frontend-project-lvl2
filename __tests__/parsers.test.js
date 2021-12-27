@@ -1,11 +1,15 @@
 import { expect, test } from '@jest/globals';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import parser from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFileData = (filePath) => fs.readFileSync(path.resolve(process.cwd(), filePath), 'utf8');
+const formats = ['json', 'yml'];
 
 const result = {
   common: {
@@ -44,12 +48,7 @@ const result = {
   },
 };
 
-test('yaml', () => {
-  const yaml = parser(getFixturePath('before.yml'));
-  expect(yaml).toEqual(result);
-});
-
-test('json', () => {
-  const json = parser(getFixturePath('before.json'));
-  expect(json).toEqual(result);
+test.each(formats)('%s', (format) => {
+  const expected = parser(getFileData(getFixturePath(`before.${format}`)), `.${format}`);
+  expect(expected).toEqual(result);
 });
