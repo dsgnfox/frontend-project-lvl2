@@ -9,7 +9,7 @@
 ```bash
 make install
 npm link
-gendiff oldFilePath newFilePath
+gendiff firstFilePath secondFilePath
 ```
 
 ## Опции

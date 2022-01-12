@@ -6,12 +6,12 @@ import makeTree from './makeTree.js';
 
 const getFileData = (filePath) => fs.readFileSync(path.resolve(process.cwd(), filePath), 'utf8');
 
-const genDiff = (oldFilePath, newFilePath, format = 'stylish') => {
-  const oldFileExtname = path.extname(oldFilePath);
-  const newFileExtname = path.extname(newFilePath);
-  const oldData = parser(getFileData(oldFilePath), oldFileExtname);
-  const newData = parser(getFileData(newFilePath), newFileExtname);
-  const diffs = makeTree(oldData, newData);
+const genDiff = (firstFilePath, secondFilePath, format = 'stylish') => {
+  const firstFileExtname = path.extname(firstFilePath);
+  const secondFileExtname = path.extname(secondFilePath);
+  const firstData = parser(getFileData(firstFilePath), firstFileExtname);
+  const secondData = parser(getFileData(secondFilePath), secondFileExtname);
+  const diffs = makeTree(firstData, secondData);
   const styled = formatter(diffs, format);
 
   return styled;

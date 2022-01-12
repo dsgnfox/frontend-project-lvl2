@@ -2,41 +2,57 @@ import _ from 'lodash';
 
 const getUniqSortedKeys = (a, b) => _.sortBy(_.uniq([...Object.keys(a), ...Object.keys(b)]));
 
-const makeNode = (name, oldValue, newValue, status) => ({
-  name, oldValue, newValue, status,
-});
-
-const makeList = (name, status, children = []) => ({
-  name,
-  status,
-  children: [...children],
-});
-
-const makeTree = (oldState = {}, newState = {}) => {
-  const iter = (key, oldData, newData) => {
-    if (_.isPlainObject(oldData[key]) && _.isPlainObject(newData[key])) {
-      const uniqKeys = getUniqSortedKeys(oldData[key], newData[key]);
-      return makeList(key, 'nested', uniqKeys.map((uniqKey) => iter(uniqKey, oldData[key], newData[key])));
+const makeTree = (firstState = {}, secondState = {}) => {
+  const iter = (key, firstData, secondData) => {
+    if (_.isPlainObject(firstData[key]) && _.isPlainObject(secondData[key])) {
+      const uniqKeys = getUniqSortedKeys(firstData[key], secondData[key]);
+      return {
+        name: key,
+        status: 'nested',
+        children: [...uniqKeys.map((uniqKey) => iter(uniqKey, firstData[key], secondData[key]))],
+      };
     }
 
-    if (!_.has(oldData, key)) {
-      return makeNode(key, oldData[key], newData[key], 'added');
+    if (!_.has(firstData, key)) {
+      return {
+        name: key,
+        status: 'added',
+        newValue: secondData[key],
+      };
     }
 
-    if (!_.has(newData, key)) {
-      return makeNode(key, oldData[key], newData[key], 'removed');
+    if (!_.has(secondData, key)) {
+      return {
+        name: key,
+        status: 'removed',
+        oldValue: firstData[key],
+      };
     }
 
-    if (!_.isEqual(oldData[key], newData[key])) {
-      return makeNode(key, oldData[key], newData[key], 'updated');
+    if (!_.isEqual(firstData[key], secondData[key])) {
+      return {
+        name: key,
+        status: 'updated',
+        oldValue: firstData[key],
+        newValue: secondData[key],
+      };
     }
 
-    return makeNode(key, oldData[key], newData[key], 'unchanged');
+    return {
+      name: key,
+      status: 'unchanged',
+      oldValue: firstData[key],
+      newValue: secondData[key],
+    };
   };
 
-  const uniqKeys = getUniqSortedKeys(oldState, newState);
+  const uniqKeys = getUniqSortedKeys(firstState, secondState);
 
-  return makeList('root', '', uniqKeys.map((key) => iter(key, oldState, newState)));
+  return {
+    name: 'root',
+    status: '',
+    children: [...uniqKeys.map((uniqKey) => iter(uniqKey, firstState, secondState))],
+  };
 };
 
 export default makeTree;

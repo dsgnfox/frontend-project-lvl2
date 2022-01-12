@@ -12,20 +12,20 @@ const getStringifyTree = (lines, spaces) => (
   ].join('\n')
 );
 
-const getValue = (data, depth) => {
+const stringify = (data, depth) => {
   if (!_.isObject(data)) {
     return data;
   }
   const lines = Object
     .entries(data)
     .map(([key, value]) => {
-      const preparedValue = getValue(value, depth + 1);
+      const preparedValue = stringify(value, depth + 1);
       return `${getIndent(depth)}${indent}${key}: ${preparedValue}`;
     });
   return getStringifyTree(lines, getIndent(depth));
 };
 
-const getStringifyLine = (depth, sign, key, value) => ` ${getIndent(depth)} ${sign} ${key}: ${getValue(value, depth + 1)}`;
+const getStringifyLine = (depth, sign, key, value) => ` ${getIndent(depth)} ${sign} ${key}: ${stringify(value, depth + 1)}`;
 
 const mapping = {
   added: (depth, { name, newValue }) => getStringifyLine(depth, '+', name, newValue),
